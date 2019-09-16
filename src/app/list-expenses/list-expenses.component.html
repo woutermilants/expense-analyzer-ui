@@ -1,0 +1,25 @@
+<p>list-expenses works!</p>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>Expenses</h3>
+  </div>
+</div>
+<br/>
+<mat-card>
+  <table [dataSource]="expensesDataSource" mat-table matSort>
+    <ng-container matColumnDef="counterpart">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Counter part</th>
+      <td *matCellDef="let expense" mat-cell> {{getCounterPartName(expense)}}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Amount</th>
+      <td *matCellDef="let expense" mat-cell> {{getAmount(expense)}}</td>
+    </ng-container>
+    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</mat-card>
+
