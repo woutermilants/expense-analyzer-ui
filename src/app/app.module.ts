@@ -8,17 +8,28 @@ import { SharedModule } from './shared/shared.module';
 import { ExpenseService} from './service/expense.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { RoutingModule } from './routing/routing.module';
+//import { MainNavComponent } from './main-nav/main-nav.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    ListExpensesComponent
+    ListExpensesComponent,
+    //MainNavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    RoutingModule
   ],
   providers: [
   ExpenseService
