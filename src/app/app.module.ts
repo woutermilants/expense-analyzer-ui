@@ -4,8 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListExpensesComponent } from './list-expenses/list-expenses.component';
+import { CounterpartOverviewComponent } from './counterpart-overview/counterpart-overview.component';
 import { SharedModule } from './shared/shared.module';
 import { ExpenseService} from './service/expense.service';
+import { CounterpartService} from './service/counterpart.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { MatTableModule } from '@angular/material/table';
@@ -18,6 +20,7 @@ import { RoutingModule } from './routing/routing.module';
   declarations: [
     AppComponent,
     ListExpensesComponent,
+    CounterpartOverviewComponent
     //MainNavComponent,
   ],
   imports: [
@@ -32,7 +35,8 @@ import { RoutingModule } from './routing/routing.module';
     RoutingModule
   ],
   providers: [
-  ExpenseService
+  ExpenseService,
+    CounterpartService
   ],
   bootstrap: [AppComponent]
 })

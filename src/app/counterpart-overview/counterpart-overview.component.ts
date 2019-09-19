@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Expense} from '../models/expense.model';
-import {ExpenseService} from '../service/expense.service';
+import {Counterpart} from '../models/counterpart.model';
+import {CounterpartService} from '../service/counterpart.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../models/page.model';
@@ -8,29 +8,29 @@ import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 import {tap} from "rxjs/operators";
 
 @Component({
-  selector: 'app-list-expenses',
-  templateUrl: './list-expenses.component.html',
-  styleUrls: ['./list-expenses.component.scss']
+  selector: 'app-counterparts',
+  templateUrl: './counterpart-overview.component.html',
+  styleUrls: ['./counterpart-overview.component.scss']
 })
-export class ListExpensesComponent implements OnInit, AfterViewInit {
+export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, {static: false}) matSort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  columnsToDisplay: string[] = ['counterPartName', 'amountInCents'];
-  page: Page<Expense>;
-  expensesDataSource= new MatTableDataSource<Expense>();
+  columnsToDisplay: string[] = ['name', 'accountNumber', 'ownAccount', 'recurringCounterPart'];
+  page: Page<Counterpart>;
+  counterpartsDataSource= new MatTableDataSource<Counterpart>();
   paginationAndSorting: PaginationAndSorting;
 
 
-  constructor(private expenseService: ExpenseService) {
-    this.expensesDataSource  = new MatTableDataSource<Expense>();
+  constructor(private counterpartService: CounterpartService) {
+    this.counterpartsDataSource  = new MatTableDataSource<Counterpart>();
   }
 
   ngOnInit() {
     setTimeout(() => this.reloadData());
     this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-    //this.expensesDataSource.loadProducts("id", "ASC", 0);
+    //this.counterpartsDataSource.loadProducts("id", "ASC", 0);
   }
 
   ngAfterViewInit() {
@@ -47,10 +47,10 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
   }
 
   private reloadData() {
-    this.expenseService.getExpenses(this.paginationAndSorting)
+    this.counterpartService.getCounterparts(this.paginationAndSorting)
       .subscribe((page) => {
         this.page = page;
-        this.expensesDataSource.data = page.content;
+        this.counterpartsDataSource.data = page.content;
         this.paginator.length = this.page ? this.page.totalElements : undefined;
       });
   }
@@ -71,25 +71,25 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
       });
     }
 
-    getCounterPartName(expense: Expense): string {
-      return expense.counterPartName.trim() ? expense.counterPartName : expense.counterPartAccount;
+    getCounterPartName(counterpart: Counterpart): string {
+      return counterpart.counterPartName.trim() ? counterpart.counterPartName : counterpart.counterPartAccount;
     }
 
-    getAmount(expense: Expense): number {
-      return expense.amountInCents / 100;
+    getAmount(counterpart: Counterpart): number {
+      return counterpart.amountInCents / 100;
     }
 
     private reloadData() {
-      this.expenseService.getExpenses(this.paginationAndSorting)
+      this.counterpartService.getCounterparts(this.paginationAndSorting)
         .subscribe((page) => {
           this.page = page;
-          this.expensesDataSource.data = page.content;
+          this.counterpartsDataSource.data = page.content;
           this.paginator.length = this.page ? this.page.totalElements : undefined;
         });
     }
 
     ngAfterViewInit() {
-      this.expensesDataSource.paginator = this.paginator;
+      this.counterpartsDataSource.paginator = this.paginator;
       this.paginator.page.subscribe((pageEvent) => {
         this.paginationAndSorting =
           new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);

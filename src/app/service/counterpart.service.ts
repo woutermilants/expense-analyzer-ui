@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {Expense} from '../models/expense.model';
+import {Counterpart} from '../models/counterpart.model';
 import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 
@@ -11,34 +11,34 @@ const httpOptions = {
 };
 
 @Injectable()
-export class ExpenseService {
+export class CounterpartService {
 
-  //private expenseUrl = environment.expenseApiUrl + '/expenses';
-  private expenseUrl = 'http://192.168.0.56:8089' + '/expenses';
-  //private expenseUrl = 'http://84.194.148.237:8089';
+  //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
+  private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
+ // private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
 
   constructor(private http: HttpClient) {
   }
 
-  public getExpenses(paginationAndSorting: PaginationAndSorting): Observable<Page<Expense>> {
+  public getCounterparts(paginationAndSorting: PaginationAndSorting): Observable<Page<Counterpart>> {
     const params = this.createHttpParams(paginationAndSorting);
-    return this.http.get<Page<Expense>>(this.expenseUrl, {params});
+    return this.http.get<Page<Counterpart>>(this.counterpartUrl, {params});
   }
 
-  public getExpense(id: number): Observable<Expense> {
-    return this.http.get<Expense>(this.expenseUrl + '/' + id);
+  public getCounterpart(id: number): Observable<Counterpart> {
+    return this.http.get<Counterpart>(this.counterpartUrl + '/' + id);
   }
 
-  public createExpense(expense: Expense): Observable<Expense> {
-    return this.http.post<Expense>(this.expenseUrl, expense, httpOptions);
+  public createCounterpart(counterpart: Counterpart): Observable<Counterpart> {
+    return this.http.post<Counterpart>(this.counterpartUrl, counterpart, httpOptions);
   }
 
-  public updateExpense(expense: Expense): Observable<Expense> {
-    return this.http.put<Expense>(this.expenseUrl + '/' + expense.id, expense, httpOptions);
+  public updateCounterpart(counterpart: Counterpart): Observable<Counterpart> {
+    return this.http.put<Counterpart>(this.counterpartUrl + '/' + counterpart.accountNumber, counterpart, httpOptions);
   }
 
-  public deleteExpense(id: number): Observable<any> {
-    return this.http.delete(this.expenseUrl + '/' + id);
+  public deleteCounterpart(id: number): Observable<any> {
+    return this.http.delete(this.counterpartUrl + '/' + id);
   }
 
   private createHttpParams(paginationAndSorting: PaginationAndSorting): HttpParams {
