@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
 import {Counterpart} from '../models/counterpart.model';
 import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
@@ -14,8 +13,8 @@ const httpOptions = {
 export class CounterpartService {
 
   //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
-  private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
- // private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
+//  private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
+  private counterpartUrl = 'http://84.194.148.237:8089' + '/counterparts';
 
   constructor(private http: HttpClient) {
   }

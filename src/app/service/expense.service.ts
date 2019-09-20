@@ -14,8 +14,8 @@ const httpOptions = {
 export class ExpenseService {
 
   //private expenseUrl = environment.expenseApiUrl + '/expenses';
-  private expenseUrl = 'http://192.168.0.56:8089' + '/expenses';
-  //private expenseUrl = 'http://84.194.148.237:8089';
+  //private expenseUrl = 'http://192.168.0.56:8089' + '/expenses';
+  private expenseUrl = 'http://84.194.148.237:8089' + '/expenses';
 
   constructor(private http: HttpClient) {
   }
