@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterpartOverviewComponent } from './counterpart-overview.component';
+import { CounterpartEditComponent } from './counterpart-edit.component';
 
 describe('ListCounterpartsComponent', () => {
-  let component: CounterpartOverviewComponent;
-  let fixture: ComponentFixture<CounterpartOverviewComponent>;
+  let component: CounterpartEditComponent;
+  let fixture: ComponentFixture<CounterpartEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CounterpartOverviewComponent ]
+      declarations: [ CounterpartEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CounterpartOverviewComponent);
+    fixture = TestBed.createComponent(CounterpartEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

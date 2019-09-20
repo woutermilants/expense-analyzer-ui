@@ -1,6 +1,7 @@
 export class Counterpart {
 accountNumber: string;
 name: string;
-recurringCounterPart: boolean
+recurringCounterPart: boolean;
 ownAccount: boolean;
+totalAmountInCents: boolean;
 }

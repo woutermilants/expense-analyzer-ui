@@ -16,7 +16,7 @@ h2 {
 
 .example-table-container {
   position: relative;
-  max-height: 1400px;
+  max-height: 800px;
   overflow: auto;
 }
 
@@ -112,4 +112,8 @@ h2 {
   50% {
     opacity: 0.5;
   }
+}
+
+.mat-paginator-range-label {
+  margin: 0;
 }

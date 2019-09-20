@@ -9,18 +9,19 @@ import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-counterparts',
-  templateUrl: './counterpart-overview.component.html',
-  styleUrls: ['./counterpart-overview.component.scss']
+  templateUrl: './counterpart-edit.component.html',
+  styleUrls: ['./counterpart-edit.component.scss']
 })
-export class TotalPerCounterpartOverviewComponent implements OnInit, AfterViewInit {
+export class CounterpartEditComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort, {static: false}) matSort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  columnsToDisplay: string[] = ['name', 'accountNumber', 'totalAmount'];
+  columnsToDisplay: string[] = ['name', 'accountNumber', 'ownAccount', 'recurringCounterPart'];
   page: Page<Counterpart>;
   counterpartsDataSource= new MatTableDataSource<Counterpart>();
   paginationAndSorting: PaginationAndSorting;
+
 
   constructor(private counterpartService: CounterpartService) {
     this.counterpartsDataSource  = new MatTableDataSource<Counterpart>();
