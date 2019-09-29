@@ -6,34 +6,41 @@ import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'}),
+  params: new HttpParams()
 };
 
 @Injectable()
 export class CounterpartService {
-
   //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
-//  private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
-  private counterpartUrl = 'http://84.194.148.237:8089' + '/counterparts';
+ // private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
+ // private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
+  private counterpartUrl = 'http://localhost:8089/counterparts';
 
   constructor(private http: HttpClient) {
   }
 
   public getCounterparts(paginationAndSorting: PaginationAndSorting): Observable<Page<Counterpart>> {
-    const params = this.createHttpParams(paginationAndSorting);
-    return this.http.get<Page<Counterpart>>(this.counterpartUrl, {params});
+    httpOptions.params = this.createHttpParams(paginationAndSorting);
+    return this.http.get<Page<Counterpart>>(this.counterpartUrl, httpOptions );
   }
 
   public getCounterpart(id: number): Observable<Counterpart> {
     return this.http.get<Counterpart>(this.counterpartUrl + '/' + id);
   }
 
-  public createCounterpart(counterpart: Counterpart): Observable<Counterpart> {
-    return this.http.post<Counterpart>(this.counterpartUrl, counterpart, httpOptions);
+  public createCounterpart(counterpart: Counterpart): Observable<any> {
+    return this.http.post<any>(this.counterpartUrl, counterpart, httpOptions);
   }
 
-  public updateCounterpart(counterpart: Counterpart): Observable<Counterpart> {
-    return this.http.put<Counterpart>(this.counterpartUrl + '/' + counterpart.accountNumber, counterpart, httpOptions);
+  public updateCounterpart(counterpart: Counterpart) {
+     let objectObservable = this.http.put(this.counterpartUrl + '/' + counterpart.accountNumber, counterpart, httpOptions);
+
+    objectObservable.subscribe(
+      res => console.log('HTTP response', res),
+      err => console.log('HTTP Error', err),
+      () => console.log('HTTP request completed.')
+    );
   }
 
   public deleteCounterpart(id: number): Observable<any> {

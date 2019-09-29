@@ -3,5 +3,6 @@ accountNumber: string;
 name: string;
 recurringCounterPart: boolean;
 ownAccount: boolean;
-totalAmountInCents: boolean;
+totalAmountInCentsReceived: number;
+totalAmountInCentsSpent: number;
 }
