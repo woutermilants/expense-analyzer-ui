@@ -61,4 +61,10 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
     console.log(counterpart);
     this.counterpartService.updateCounterpart(counterpart)
   }
+
+  updateRecurringAccount(counterpart : Counterpart, $event: MatCheckboxChange) {
+    counterpart.recurringCounterPart = $event.checked;
+    console.log(counterpart);
+    this.counterpartService.updateCounterpart(counterpart)
+  }
 }
