@@ -7,23 +7,23 @@ import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}),
 };
 
 @Injectable()
 export class ExpenseService {
 
   //private expenseUrl = environment.expenseApiUrl + '/expenses';
-  //private expenseUrl = 'http://192.168.0.56:8089' + '/expenses';
- // private expenseUrl = 'http://84.194.148.237:8089' + '/expenses';
   private expenseUrl = 'http://localhost:8089' + '/expenses';
+  //private expenseUrl = 'http://192.168.0.56:8089' + '/expenses';
+  //private expenseUrl = 'http://84.194.148.237:8089' + '/expenses';
 
   constructor(private http: HttpClient) {
   }
 
   public getExpenses(paginationAndSorting: PaginationAndSorting): Observable<Page<Expense>> {
     const params = this.createHttpParams(paginationAndSorting);
-    return this.http.get<Page<Expense>>(this.expenseUrl, {params});
+    return this.http.get<Page<Expense>>(this.expenseUrl, httpOptions['params'] = {params});
   }
 
   public getExpense(id: number): Observable<Expense> {

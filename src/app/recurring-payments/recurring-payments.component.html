@@ -1,0 +1,20 @@
+<div class="example-container mat-elevation-z8">
+  <h2>Recurring</h2>
+
+  <div class="example-table-container" *ngIf="reportDatasource">
+    <!-- PURE CSS LOADING ICON -->
+    <mat-card>
+      <!-- ANGULAR MATERIAL TABLE -->
+      <table mat-table [dataSource]="reportDatasource" matSort class="example-table">
+
+        <ng-container matColumnDef="month">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Month</th>
+          <td mat-cell *matCellDef="let monthExpense">{{monthExpense.month}}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>

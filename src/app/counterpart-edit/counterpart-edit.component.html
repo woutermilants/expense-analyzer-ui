@@ -6,7 +6,7 @@
 </div>
 <br/>
 <mat-card>
-  <table [dataSource]="counterpartsDataSource" mat-table matSort>
+  <table [dataSource]="reportDatasource" mat-table matSort>
     <ng-container matColumnDef="counterpart">
       <th *matHeaderCellDef mat-header-cell mat-sort-header>Counter part</th>
       <td *matCellDef="let counterpart" mat-cell> {{getCounterPartName(counterpart)}}</td>

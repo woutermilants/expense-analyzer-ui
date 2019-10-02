@@ -15,6 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { RoutingModule } from './routing/routing.module';
+import { RecurringPaymentsComponent } from './recurring-payments/recurring-payments.component';
+import {ReportService} from "./service/report.service";
 //import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
@@ -22,7 +24,8 @@ import { RoutingModule } from './routing/routing.module';
     AppComponent,
     ListExpensesComponent,
     CounterpartOverviewComponent,
-    CounterpartEditComponent
+    CounterpartEditComponent,
+    RecurringPaymentsComponent
     //MainNavComponent,
   ],
   imports: [
@@ -38,7 +41,8 @@ import { RoutingModule } from './routing/routing.module';
   ],
   providers: [
   ExpenseService,
-    CounterpartService
+    CounterpartService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })
