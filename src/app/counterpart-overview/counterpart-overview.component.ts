@@ -23,15 +23,15 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
   counterpartsDataSource= new MatTableDataSource<Counterpart>();
   paginationAndSorting: PaginationAndSorting;
 
-
   constructor(private counterpartService: CounterpartService) {
     this.counterpartsDataSource  = new MatTableDataSource<Counterpart>();
   }
 
   ngOnInit() {
     setTimeout(() => this.reloadData());
+    console.log(typeof this.counterpartsDataSource.data)
+    console.log(this.counterpartsDataSource.data)
     this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-    //this.counterpartsDataSource.loadProducts("id", "ASC", 0);
   }
 
   ngAfterViewInit() {

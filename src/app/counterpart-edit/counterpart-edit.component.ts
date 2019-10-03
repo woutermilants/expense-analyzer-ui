@@ -30,7 +30,7 @@ export class CounterpartEditComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     setTimeout(() => this.reloadData());
     this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-    //this.counterpartsDataSource.loadProducts("id", "ASC", 0);
+    //this.reportDatasource.loadProducts("id", "ASC", 0);
   }
 
   ngAfterViewInit() {
@@ -83,13 +83,13 @@ export class CounterpartEditComponent implements OnInit, AfterViewInit {
       this.counterpartService.getCounterparts(this.paginationAndSorting)
         .subscribe((page) => {
           this.page = page;
-          this.counterpartsDataSource.data = page.content;
+          this.reportDatasource.data = page.content;
           this.paginator.length = this.page ? this.page.totalElements : undefined;
         });
     }
 
     ngAfterViewInit() {
-      this.counterpartsDataSource.paginator = this.paginator;
+      this.reportDatasource.paginator = this.paginator;
       this.paginator.page.subscribe((pageEvent) => {
         this.paginationAndSorting =
           new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);

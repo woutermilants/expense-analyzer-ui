@@ -7,7 +7,7 @@ import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  headers: new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}),
 };
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ExpenseService {
 
   public getExpenses(paginationAndSorting: PaginationAndSorting): Observable<Page<Expense>> {
     const params = this.createHttpParams(paginationAndSorting);
-    return this.http.get<Page<Expense>>(this.expenseUrl, {params});
+    return this.http.get<Page<Expense>>(this.expenseUrl, httpOptions['params'] = {params});
   }
 
   public getExpense(id: number): Observable<Expense> {

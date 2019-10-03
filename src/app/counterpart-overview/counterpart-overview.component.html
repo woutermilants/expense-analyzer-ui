@@ -1,29 +1,3 @@
-<!--
-<div class="row">
-  <div class="col-md-12">
-    <h3>Counterparts</h3>
-  </div>
-</div>
-<br/>
-<mat-card>
-  <table [dataSource]="counterpartsDataSource" mat-table matSort>
-    <ng-container matColumnDef="counterpart">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Counter part</th>
-      <td *matCellDef="let counterpart" mat-cell> {{getCounterPartName(counterpart)}}</td>
-    </ng-container>
-    <ng-container matColumnDef="amount">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Amount</th>
-      <td *matCellDef="let counterpart" mat-cell> {{getAmount(counterpart)}}</td>
-    </ng-container>
-    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row>
-    </tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-</mat-card>
--->
-
-
 <div class="example-container mat-elevation-z8">
   <h2>counterparts</h2>
 
@@ -60,26 +34,11 @@
         <ng-container matColumnDef="recurringCounterPart">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>recurring ?</th>
           <td mat-cell *matCellDef="let counterpart">
-            <mat-checkbox [checked]="counterpart.recurringCounterPart" (change)="updateRecurringAccount(counterpart, $event)">
-              <!--(click)="$event.stopPropagation()"-->
-              <!--(change)="$event ? selection.toggle(row) : null"-->
-
+            <mat-checkbox [checked]="counterpart.recurringCounterPart" (change)="updateRecurring(counterpart, $event)">
             </mat-checkbox>
           </td>
         </ng-container>
 
-        <!-- counterpart Price Column -->
-        <!--<ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
-          <td mat-cell *matCellDef="let counterpart">{{counterpart.price}}</td>
-        </ng-container>
-
-        &lt;!&ndash; counterpart Rating Column &ndash;&gt;
-        <ng-container matColumnDef="rating">
-          <th mat-header-cell *matHeaderCellDef>Rating</th>
-          <td mat-cell *matCellDef="let counterpart">{{counterpart.rating}}</td>
-        </ng-container>
-  -->
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
       </table>
