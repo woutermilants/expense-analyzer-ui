@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ReportService} from "../service/report.service";
-import {MonthlyPayment} from "../models/monthPayments.model";
+import {Expense} from "../models/expense.model";
 
 
 @Component({
@@ -11,7 +11,7 @@ import {MonthlyPayment} from "../models/monthPayments.model";
 })
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
-  columnsToDisplay: string[] = ['month', 'expenses'];
+  columnsToDisplay: string[] = ['amount', 'counterPartName'];
   monthLabels: Record<string, string> = {
     "01": 'January',
     "02": 'February',
@@ -41,14 +41,14 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     "December": 12
   };
 
-  reportDatasource = new MatTableDataSource<MonthlyPayment>();
+  reportDatasource = [];
 
   constructor(private reportService: ReportService) {
-    this.reportDatasource = new MatTableDataSource<MonthlyPayment>();
   }
 
   ngOnInit() {
     setTimeout(() => this.reloadData());
+    console.log(this.reportDatasource);
   }
 
   ngAfterViewInit() {
@@ -57,18 +57,30 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   private reloadData() {
 
-    this.reportDatasource = new MatTableDataSource<MonthlyPayment>();
     this.reportService.getRecurringPayments()
       .subscribe((object) => {
-        var monthlypayments : MonthlyPayment[] = [];
+        var monthlypayments : (Expense | GroupBy)[] = [];
 
-        new Map(Object.entries(object)).forEach((value, key) => {
-          monthlypayments.push(new MonthlyPayment(this.monthLabels[key], value));
+        new Map(Object.entries(object)).forEach((value : Expense[], key) => {
+          monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
+          value.forEach(value1 => {
+            monthlypayments.push(value1);
+          })
+
         });
-        this.reportDatasource.data = monthlypayments.sort((n1,n2) => {
-          return this.monthNames[n1.activeMonth] - this.monthNames[n2.activeMonth];
-        });
+        this.reportDatasource = monthlypayments;
       });
+  }
+
+  isGroup(index, item): boolean{
+    return item.isGroupBy;
   }
 }
 
+export interface GroupBy {
+  name: string;
+  isGroupBy: boolean;
+}
+
+
+//https://stackblitz.com/edit/angular-mattable-with-groupheader?file=app%2Ftable-basic-example.ts
