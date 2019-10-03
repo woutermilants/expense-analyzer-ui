@@ -29,6 +29,7 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     setTimeout(() => this.reloadData());
+    console.log(typeof this.counterpartsDataSource.data)
     console.log(this.counterpartsDataSource.data)
     this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
   }
@@ -57,6 +58,12 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
 
   updateOwnAccount(counterpart : Counterpart, $event: MatCheckboxChange) {
     counterpart.ownAccount = $event.checked;
+    console.log(counterpart);
+    this.counterpartService.updateCounterpart(counterpart)
+  }
+
+  updateRecurring(counterpart : Counterpart, $event: MatCheckboxChange) {
+    counterpart.recurringCounterPart = $event.checked;
     console.log(counterpart);
     this.counterpartService.updateCounterpart(counterpart)
   }

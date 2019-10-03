@@ -1,12 +1,12 @@
 import {Expense} from "./expense.model";
 
-export class MonthPayments {
+export class MonthlyPayment {
 
-  constructor(month: string, expenses: Expense[]) {
-    this.month = month;
+  constructor(activeMonth: string, expenses: Expense[]) {
+    this.activeMonth = activeMonth;
     this.expenses = expenses;
   }
 
-  month: string;
+  activeMonth: string;
   expenses: Expense[]
 }
