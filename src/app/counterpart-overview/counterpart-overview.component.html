@@ -34,7 +34,7 @@
         <ng-container matColumnDef="recurringCounterPart">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>recurring ?</th>
           <td mat-cell *matCellDef="let counterpart">
-            <mat-checkbox [checked]="counterpart.recurringCounterPart" (change)="updateRecurring(counterpart, $event)">
+            <mat-checkbox [checked]="counterpart.recurringCounterPart" (change)="updateRecurringAccount(counterpart, $event)">
             </mat-checkbox>
           </td>
         </ng-container>

@@ -17,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { RoutingModule } from './routing/routing.module';
 import { RecurringPaymentsComponent } from './recurring-payments/recurring-payments.component';
 import {ReportService} from "./service/report.service";
+import {DatePipe} from "@angular/common";
 //import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
@@ -42,7 +43,8 @@ import {ReportService} from "./service/report.service";
   providers: [
   ExpenseService,
     CounterpartService,
-    ReportService
+    ReportService,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

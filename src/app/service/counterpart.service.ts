@@ -14,8 +14,8 @@ const httpOptions = {
 export class CounterpartService {
   //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
  // private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
-  private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
- // private counterpartUrl = 'http://localhost:8089/counterparts';
+  //private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
+  private counterpartUrl = 'http://localhost:8089/counterparts';
 
   constructor(private http: HttpClient) {
   }

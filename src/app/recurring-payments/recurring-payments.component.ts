@@ -2,6 +2,9 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ReportService} from "../service/report.service";
 import {Expense} from "../models/expense.model";
+import {CounterpartService} from "../service/counterpart.service";
+import {Counterpart} from "../models/counterpart.model";
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -11,7 +14,7 @@ import {Expense} from "../models/expense.model";
 })
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
-  columnsToDisplay: string[] = ['amount', 'counterPartName'];
+  columnsToDisplay: string[] = ['date', 'counterPartName','amount', 'statement'];
   monthLabels: Record<string, string> = {
     "01": 'January',
     "02": 'February',
@@ -43,7 +46,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   reportDatasource = [];
 
-  constructor(private reportService: ReportService) {
+  constructor(private reportService: ReportService, private counterpartService: CounterpartService, private datepipe: DatePipe) {
   }
 
   ngOnInit() {
@@ -64,16 +67,23 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
         new Map(Object.entries(object)).forEach((value : Expense[], key) => {
           monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
           value.forEach(value1 => {
+            value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
             monthlypayments.push(value1);
           })
 
         });
         this.reportDatasource = monthlypayments;
+        console.log(monthlypayments)
       });
   }
 
   isGroup(index, item): boolean{
     return item.isGroupBy;
+  }
+
+  setRecurringToFalse(counterPart : Counterpart) {
+    counterPart.recurringCounterPart = false;
+    this.counterpartService.updateCounterpart(counterPart)
   }
 }
 
