@@ -54,46 +54,4 @@ export class CounterpartEditComponent implements OnInit, AfterViewInit {
         this.paginator.length = this.page ? this.page.totalElements : undefined;
       });
   }
-
-  /*
-    ngOnInit() {
-      this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-      this.reloadData();
-      this.paginator.page.subscribe((pageEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);
-        this.reloadData();
-      });
-      this.matSort.sortChange.subscribe((sortEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(this.paginator.pageIndex, this.paginator.pageSize, sortEvent.active, sortEvent.direction);
-        this.reloadData();
-      });
-    }
-
-    getCounterPartName(counterpart: Counterpart): string {
-      return counterpart.counterPartName.trim() ? counterpart.counterPartName : counterpart.counterPartAccount;
-    }
-
-    getAmount(counterpart: Counterpart): number {
-      return counterpart.amountInCents / 100;
-    }
-
-    private reloadData() {
-      this.counterpartService.getCounterparts(this.paginationAndSorting)
-        .subscribe((page) => {
-          this.page = page;
-          this.reportDatasource.data = page.content;
-          this.paginator.length = this.page ? this.page.totalElements : undefined;
-        });
-    }
-
-    ngAfterViewInit() {
-      this.reportDatasource.paginator = this.paginator;
-      this.paginator.page.subscribe((pageEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);
-        this.reloadData();
-      });
-    }*/
 }

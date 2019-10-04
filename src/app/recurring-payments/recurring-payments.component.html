@@ -35,9 +35,25 @@
         </ng-container>
 
         <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"></tr>
-
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+       <!-- <ng-container matColumnDef="expandedDetail">
+          <mat-cell *matCellDef="let counterpart">
+            kjlkjlk {{counterpart.expenses}}
+          </mat-cell>
+        </ng-container>-->
+
+           <!-- <mat-row *matRowDef="let row; columns: columnsToDisplay;"
+            matRipple
+            class="element-row"
+            [class.expanded]="expandedElement == row"
+                 (click)="expandedElement = row"></mat-row>
+        <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+                 [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+                 style="overflow: hidden"></mat-row>-->
+
+
       </table>
     </mat-card>
   </div>

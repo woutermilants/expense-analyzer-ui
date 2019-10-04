@@ -14,6 +14,7 @@ import {DatePipe} from "@angular/common";
 })
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
+  expandedElement: any;
   columnsToDisplay: string[] = ['date', 'counterPartName','amount', 'statement'];
   monthLabels: Record<string, string> = {
     "01": 'January',
@@ -85,6 +86,8 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     counterPart.recurringCounterPart = false;
     this.counterpartService.updateCounterpart(counterPart)
   }
+
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 }
 
 export interface GroupBy {

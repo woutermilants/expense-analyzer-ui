@@ -17,7 +17,7 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: false}) matSort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  columnsToDisplay: string[] = ['counterPartName', 'amountInCents'];
+  columnsToDisplay: string[] = ['date','counterPartName', 'amount', 'statement'];
   page: Page<Expense>;
   expensesDataSource= new MatTableDataSource<Expense>();
   paginationAndSorting: PaginationAndSorting;
@@ -54,46 +54,4 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
         this.paginator.length = this.page ? this.page.totalElements : undefined;
       });
   }
-
-  /*
-    ngOnInit() {
-      this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-      this.reloadData();
-      this.paginator.page.subscribe((pageEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);
-        this.reloadData();
-      });
-      this.matSort.sortChange.subscribe((sortEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(this.paginator.pageIndex, this.paginator.pageSize, sortEvent.active, sortEvent.direction);
-        this.reloadData();
-      });
-    }
-
-    getCounterPartName(expense: Expense): string {
-      return expense.counterPartName.trim() ? expense.counterPartName : expense.counterPartAccount;
-    }
-
-    getAmount(expense: Expense): number {
-      return expense.amountInCents / 100;
-    }
-
-    private reloadData() {
-      this.expenseService.getExpenses(this.paginationAndSorting)
-        .subscribe((page) => {
-          this.page = page;
-          this.expensesDataSource.data = page.content;
-          this.paginator.length = this.page ? this.page.totalElements : undefined;
-        });
-    }
-
-    ngAfterViewInit() {
-      this.expensesDataSource.paginator = this.paginator;
-      this.paginator.page.subscribe((pageEvent) => {
-        this.paginationAndSorting =
-          new PaginationAndSorting(pageEvent.pageIndex, pageEvent.pageSize, this.matSort.active, this.matSort.direction);
-        this.reloadData();
-      });
-    }*/
 }
