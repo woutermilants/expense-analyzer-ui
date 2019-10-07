@@ -1,3 +1,5 @@
+import {Counterpart} from "./counterpart.model";
+
 export class Expense {
   id: number;
   accountNumber: string;
@@ -7,7 +9,6 @@ export class Expense {
   description: string;
   statement: string;
   amount: number;
-  counterPartName: string;
-  counterPartAccount: string;
+  counterPart: Counterpart
 }
 

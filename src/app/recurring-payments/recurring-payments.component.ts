@@ -5,12 +5,20 @@ import {Expense} from "../models/expense.model";
 import {CounterpartService} from "../service/counterpart.service";
 import {Counterpart} from "../models/counterpart.model";
 import {DatePipe} from "@angular/common";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'app-recurring-payments',
   templateUrl: './recurring-payments.component.html',
-  styleUrls: ['./recurring-payments.component.scss']
+  styleUrls: ['./recurring-payments.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
@@ -66,7 +74,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
         var monthlypayments : (Expense | GroupBy)[] = [];
 
         new Map(Object.entries(object)).forEach((value : Expense[], key) => {
-          monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
+        //  monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
           value.forEach(value1 => {
             value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
             monthlypayments.push(value1);
