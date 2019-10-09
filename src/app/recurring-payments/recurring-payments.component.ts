@@ -78,15 +78,11 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
           monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
           value.forEach(value1 => {
             value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
-            console.log(typeof  value1);
-            console.log( value1.counterPart);
             monthlypayments.push(value1);
-            console.log(monthlypayments)
           })
 
         });
         this.reportDatasource = monthlypayments;
-        console.log('montlhy payments '+  monthlypayments[0])
       });
   }
 
@@ -105,7 +101,11 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   getExpensesForCounterPart(expense : Expense) {
     console.log("get expneses for counterpart " + expense.counterPart.accountNumber);
-    return this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber);
+    this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber).subscribe(data => {
+      console.log(data);
+        console.log(expense.counterPart);
+        expense.counterPart.expenses = data ;
+    });
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');

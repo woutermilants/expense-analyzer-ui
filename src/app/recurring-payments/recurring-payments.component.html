@@ -1,4 +1,4 @@
-<div class="example-container mat-elevation-z8" xmlns:when="http://www.w3.org/1999/xhtml">
+<div class="example-container mat-elevation-z8">
   <h2>Recurring</h2>
 
   <div class="example-table-container" *ngIf="reportDatasource">
@@ -9,8 +9,8 @@
         <ng-container matColumnDef="counterPartName">
           <th mat-header-cell *matHeaderCellDef>counter part</th>
           <td mat-cell *matCellDef="let expense" [class.example-expanded-row]="expandedElement === expense"
-              (click)="expandedElement = expandedElement === expense ? null : expense">
-            <span>{{expense.id}} : --><!--{{expense.counterPart.accountNumber}}--></span>
+              (click)="expandedElement = expandedElement === expense ? null : expense; getExpensesForCounterPart(expense)">
+            <span>{{expense.counterPart.name}} ({{expense.counterPart.accountNumber}}) </span>
             <span><a [routerLink]="" (click)="setRecurringToFalse(expense.counterPart)">Not recurring</a></span>
           </td>
         </ng-container>
@@ -33,6 +33,12 @@
         <ng-container matColumnDef="expandedDetail">
           <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
             <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div *ngIf="element.counterPart.expenses">
+                <div *ngFor="let expense of element.counterPart.expenses">
+                  <div>abcdef</div>
+                  <div>{{expense.id}}</div>
+                </div>
+              </div>
               <div class="example-element-diagram">
                 <div class="example-element-name"> {{element.id}} </div>
                 <div class="example-element-name"> {{element.date}} </div>
@@ -40,7 +46,7 @@
               </div>
               <div class="example-element-description">
                 {{element.description}}
-                <span class="example-element-description-attribution"> -- Wikipedia </span>
+                <span class="example-element-description-attribution"></span>
               </div>
             </div>
           </td>
