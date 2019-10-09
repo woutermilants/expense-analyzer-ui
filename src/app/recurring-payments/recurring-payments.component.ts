@@ -3,6 +3,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ReportService} from "../service/report.service";
 import {Expense} from "../models/expense.model";
 import {CounterpartService} from "../service/counterpart.service";
+import {ExpenseService} from "../service/expense.service";
 import {Counterpart} from "../models/counterpart.model";
 import {DatePipe} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -55,7 +56,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   reportDatasource = [];
 
-  constructor(private reportService: ReportService, private counterpartService: CounterpartService, private datepipe: DatePipe) {
+  constructor(private reportService: ReportService, private counterpartService: CounterpartService, private datepipe: DatePipe, private expenseService: ExpenseService) {
   }
 
   ngOnInit() {
@@ -74,15 +75,18 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
         var monthlypayments : (Expense | GroupBy)[] = [];
 
         new Map(Object.entries(object)).forEach((value : Expense[], key) => {
-        //  monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
+          monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
           value.forEach(value1 => {
             value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
+            console.log(typeof  value1);
+            console.log( value1.counterPart);
             monthlypayments.push(value1);
+            console.log(monthlypayments)
           })
 
         });
         this.reportDatasource = monthlypayments;
-        console.log(monthlypayments)
+        console.log('montlhy payments '+  monthlypayments[0])
       });
   }
 
@@ -90,9 +94,18 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     return item.isGroupBy;
   }
 
+  isNotGroup(index, item): boolean{
+    return !item.isGroupBy;
+  }
+
   setRecurringToFalse(counterPart : Counterpart) {
     counterPart.recurringCounterPart = false;
     this.counterpartService.updateCounterpart(counterPart)
+  }
+
+  getExpensesForCounterPart(expense : Expense) {
+    console.log("get expneses for counterpart " + expense.counterPart.accountNumber);
+    return this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber);
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -105,3 +118,4 @@ export interface GroupBy {
 
 
 //https://stackblitz.com/edit/angular-mattable-with-groupheader?file=app%2Ftable-basic-example.ts
+//https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.ts
