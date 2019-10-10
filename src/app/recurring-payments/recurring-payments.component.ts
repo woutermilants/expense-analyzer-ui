@@ -109,6 +109,8 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   getExpensesForCounterPart(expense: Expense) {
     this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber).subscribe(data => {
+      //expense.date = this.datepipe.transform(expense.date, 'dd/MM/yyyy').toString();
+      data.forEach(innerExpense => innerExpense.date=this.datepipe.transform(innerExpense.date, 'dd/MM/yyyy').toString());
       expense.counterPart.expenses = data;
     });
   }
