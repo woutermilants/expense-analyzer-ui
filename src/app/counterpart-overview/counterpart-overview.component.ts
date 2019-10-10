@@ -80,4 +80,10 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
   applyFilter(filterValue: string) {
     this.counterpartsDataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  updateName(counterPart : Counterpart, counterPartName: string) {
+    counterPart.name = counterPartName.trim();
+    this.counterpartService.updateCounterpart(counterPart)
+
+  }
 }

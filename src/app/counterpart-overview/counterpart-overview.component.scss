@@ -20,6 +20,11 @@ h2 {
   overflow: auto;
 }
 
+input {
+  outline: thin;
+  border: ridge;
+}
+
 /* LOADING ICON STYLING */
 .loading-container {
   position: absolute;

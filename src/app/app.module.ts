@@ -19,6 +19,7 @@ import {ReportService} from "./service/report.service";
 import {DatePipe} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from '@angular/material';
 //import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatSortModule,
     RoutingModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
   ExpenseService,
