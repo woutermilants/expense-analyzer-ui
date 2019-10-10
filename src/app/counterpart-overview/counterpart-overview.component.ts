@@ -7,6 +7,8 @@ import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 import {tap} from "rxjs/operators";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-counterparts',
@@ -22,16 +24,23 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
   page: Page<Counterpart>;
   counterpartsDataSource= new MatTableDataSource<Counterpart>();
   paginationAndSorting: PaginationAndSorting;
+  requestedAccountNumber: string;
 
-  constructor(private counterpartService: CounterpartService) {
+  constructor(private counterpartService: CounterpartService,
+              private matIconRegistry: MatIconRegistry,
+              private domSanitizer: DomSanitizer,
+              private activatedRoute: ActivatedRoute) {
     this.counterpartsDataSource  = new MatTableDataSource<Counterpart>();
+   // matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityResourceUrl('/assets/mdi.svg'));
+
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.requestedAccountNumber = params['accountNumber'];
+    });
     setTimeout(() => this.reloadData());
-    console.log(typeof this.counterpartsDataSource.data)
-    console.log(this.counterpartsDataSource.data)
-    this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
+    this.paginationAndSorting = new PaginationAndSorting(0, 500, null, 'asc');
   }
 
   ngAfterViewInit() {
@@ -45,11 +54,13 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
         new PaginationAndSorting(this.paginator.pageIndex, this.paginator.pageSize, sortEvent.active, sortEvent.direction);
       this.reloadData();
     });
+    if (this.requestedAccountNumber) {
+      this.applyFilter(this.requestedAccountNumber);
+    }
   }
 
   private reloadData() {
-    this.counterpartService.getCounterparts(this.paginationAndSorting)
-      .subscribe((page) => {
+      this.counterpartService.getCounterparts(this.paginationAndSorting).subscribe((page) => {
         this.page = page;
         this.counterpartsDataSource.data = page.content;
         this.paginator.length = this.page ? this.page.totalElements : undefined;
@@ -58,13 +69,15 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
 
   updateOwnAccount(counterpart : Counterpart, $event: MatCheckboxChange) {
     counterpart.ownAccount = $event.checked;
-    console.log(counterpart);
     this.counterpartService.updateCounterpart(counterpart)
   }
 
   updateRecurringAccount(counterpart : Counterpart, $event: MatCheckboxChange) {
     counterpart.recurringCounterPart = $event.checked;
-    console.log(counterpart);
     this.counterpartService.updateCounterpart(counterpart)
+  }
+
+  applyFilter(filterValue: string) {
+    this.counterpartsDataSource.filter = filterValue.trim().toLowerCase();
   }
 }

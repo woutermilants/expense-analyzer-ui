@@ -22,7 +22,6 @@ export class ReportService {
 
   public getRecurringPayments(): Observable<Map<String, Array<Expense>>> {
     let observable = this.http.get<Map<String, Array<Expense>>>(this.reportUrl + "/recurringPayments");
-    console.log(observable);
     return observable;
   }
 

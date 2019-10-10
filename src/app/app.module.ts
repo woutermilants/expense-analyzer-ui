@@ -10,7 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { ExpenseService} from './service/expense.service';
 import { CounterpartService} from './service/counterpart.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -18,6 +17,8 @@ import { RoutingModule } from './routing/routing.module';
 import { RecurringPaymentsComponent } from './recurring-payments/recurring-payments.component';
 import {ReportService} from "./service/report.service";
 import {DatePipe} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
 //import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
@@ -38,7 +39,9 @@ import {DatePipe} from "@angular/common";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    RoutingModule
+    RoutingModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [
   ExpenseService,

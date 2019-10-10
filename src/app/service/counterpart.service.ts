@@ -25,8 +25,8 @@ export class CounterpartService {
     return this.http.get<Page<Counterpart>>(this.counterpartUrl, httpOptions );
   }
 
-  public getCounterpart(id: number): Observable<Counterpart> {
-    return this.http.get<Counterpart>(this.counterpartUrl + '/' + id);
+  public getCounterpart(accountNumber: string): Observable<Counterpart> {
+    return this.http.get<Counterpart>(this.counterpartUrl + '/' + accountNumber);
   }
 
   public createCounterpart(counterpart: Counterpart): Observable<any> {

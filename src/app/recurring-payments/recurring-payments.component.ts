@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ReportService} from "../service/report.service";
 import {Expense} from "../models/expense.model";
 import {CounterpartService} from "../service/counterpart.service";
@@ -7,6 +6,7 @@ import {ExpenseService} from "../service/expense.service";
 import {Counterpart} from "../models/counterpart.model";
 import {DatePipe} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -24,7 +24,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   expandedElement: any;
-  columnsToDisplay: string[] = ['date', 'counterPartName','amount', 'statement'];
+  columnsToDisplay: string[] = ['date', 'counterPartName', 'amount', 'statement'];
+  innerColumnsToDisplay: string[] = ['date', 'amount', 'statement', 'description'];
   monthLabels: Record<string, string> = {
     "01": 'January',
     "02": 'February',
@@ -39,7 +40,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     "11": 'November',
     "12": 'December'
   };
-  monthNames : Record<string, number> = {
+  monthNames: Record<string, number> = {
     "January": 1,
     "February": 2,
     "March": 3,
@@ -56,12 +57,15 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   reportDatasource = [];
 
-  constructor(private reportService: ReportService, private counterpartService: CounterpartService, private datepipe: DatePipe, private expenseService: ExpenseService) {
+  constructor(private reportService: ReportService,
+              private counterpartService: CounterpartService,
+              private datepipe: DatePipe,
+              private expenseService: ExpenseService,
+              private router: Router) {
   }
 
   ngOnInit() {
     setTimeout(() => this.reloadData());
-    console.log(this.reportDatasource);
   }
 
   ngAfterViewInit() {
@@ -72,9 +76,9 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
     this.reportService.getRecurringPayments()
       .subscribe((object) => {
-        var monthlypayments : (Expense | GroupBy)[] = [];
+        var monthlypayments: (Expense | GroupBy)[] = [];
 
-        new Map(Object.entries(object)).forEach((value : Expense[], key) => {
+        new Map(Object.entries(object)).forEach((value: Expense[], key) => {
           monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
           value.forEach(value1 => {
             value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
@@ -86,25 +90,26 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
       });
   }
 
-  isGroup(index, item): boolean{
+  isGroup(index, item): boolean {
     return item.isGroupBy;
   }
 
-  isNotGroup(index, item): boolean{
+  isNotGroup(index, item): boolean {
     return !item.isGroupBy;
   }
 
-  setRecurringToFalse(counterPart : Counterpart) {
+  setRecurringToFalse(counterPart: Counterpart) {
     counterPart.recurringCounterPart = false;
     this.counterpartService.updateCounterpart(counterPart)
   }
 
-  getExpensesForCounterPart(expense : Expense) {
-    console.log("get expneses for counterpart " + expense.counterPart.accountNumber);
+  editCounterPart(accountNumber: string) {
+    this.router.navigateByUrl('/counterpart-overview?accountNumber=' + accountNumber);
+  }
+
+  getExpensesForCounterPart(expense: Expense) {
     this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber).subscribe(data => {
-      console.log(data);
-        console.log(expense.counterPart);
-        expense.counterPart.expenses = data ;
+      expense.counterPart.expenses = data;
     });
   }
 

@@ -27,3 +27,27 @@ tr.example-detail-row {
   overflow: hidden;
   display: flex;
 }
+
+.notRecurringButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 20px;
+  opacity: 0.9;
+}
+
+.editCounterPart {
+  display: inline-block;
+  background-color: #de963c;
+  color: #ffffff;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 20px;
+  opacity: 0.9;
+}

@@ -9,7 +9,12 @@
         <!-- counterpart ID Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-          <td mat-cell *matCellDef="let counterpart">{{counterpart.name}}</td>
+          <td mat-cell *matCellDef="let counterpart">{{counterpart.name}} <a><mat-icon>edit</mat-icon></a>
+         <!--   <mat-form-field>
+              <input matInput [(ngModel)]="myDates[i]" [matDatepicker]="picker">
+            </mat-form-field>-->
+          </td>
+
         </ng-container>
 
         <!-- counterpart Name Column -->
