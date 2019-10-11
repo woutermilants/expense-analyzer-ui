@@ -31,7 +31,6 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     setTimeout(() => this.reloadData());
     this.paginationAndSorting = new PaginationAndSorting(0, 10, null, 'asc');
-    //this.expensesDataSource.loadProducts("id", "ASC", 0);
   }
 
   ngAfterViewInit() {

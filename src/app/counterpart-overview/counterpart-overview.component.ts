@@ -20,7 +20,7 @@ export class CounterpartOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: false}) matSort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  columnsToDisplay: string[] = ['name', 'accountNumber', 'ownAccount', 'recurringCounterPart'];
+  columnsToDisplay: string[] = ['name', 'accountNumber', 'ownAccount', 'recurringCounterPart', 'totalAmountReceived', 'totalAmountSpent'];
   page: Page<Counterpart>;
   counterpartsDataSource= new MatTableDataSource<Counterpart>();
   paginationAndSorting: PaginationAndSorting;
