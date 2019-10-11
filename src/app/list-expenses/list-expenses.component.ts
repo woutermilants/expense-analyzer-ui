@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 import {tap} from "rxjs/operators";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-list-expenses',
@@ -23,7 +24,7 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
   paginationAndSorting: PaginationAndSorting;
 
 
-  constructor(private expenseService: ExpenseService) {
+  constructor(private expenseService: ExpenseService, private datepipe: DatePipe,) {
     this.expensesDataSource  = new MatTableDataSource<Expense>();
   }
 
@@ -51,6 +52,7 @@ export class ListExpensesComponent implements OnInit, AfterViewInit {
       .subscribe((page) => {
         this.page = page;
         this.expensesDataSource.data = page.content;
+        this.expensesDataSource.data.forEach(expense => expense.date = this.datepipe.transform(expense.date, 'dd/MM/yyyy').toString())
         this.paginator.length = this.page ? this.page.totalElements : undefined;
       });
   }

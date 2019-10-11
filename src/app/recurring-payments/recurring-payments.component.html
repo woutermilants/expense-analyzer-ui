@@ -9,12 +9,24 @@
         <ng-container matColumnDef="counterPartName">
           <th mat-header-cell *matHeaderCellDef>counter part</th>
           <td mat-cell *matCellDef="let expense" [class.example-expanded-row]="expandedElement === expense"
-              (click)="expandedElement = expandedElement === expense ? null : expense; getExpensesForCounterPart(expense)">
-            <span>{{expense.counterPart.name}} ({{expense.counterPart.accountNumber}}) </span>
+              >
+            <span (click)="expandedElement = expandedElement === expense ? null : expense; getExpensesForCounterPart(expense)">{{expense.counterPart.name}} ({{expense.counterPart.accountNumber}}) </span>
             <span><a [routerLink]="" (click)="setRecurringToFalse(expense.counterPart)" class="notRecurringButton">Not recurring</a></span>
             <span><a [routerLink]="" (click)="editCounterPart(expense.counterPart.accountNumber)" class="editCounterPart">Edit</a></span>
           </td>
         </ng-container>
+
+  <!--      <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>edit</th>
+          <td mat-cell *matCellDef="let expense">
+            <div>
+            <span><a [routerLink]="" (click)="setRecurringToFalse(expense.counterPart)" class="notRecurringButton">Not recurring</a></span>
+            <span><a [routerLink]="" (click)="editCounterPart(expense.counterPart.accountNumber)" class="editCounterPart">Edit</a></span>
+            </div>
+          </td>
+        </ng-container>
+-->
+
 
         <ng-container matColumnDef="date">in
           <th mat-header-cell *matHeaderCellDef>Date</th>
@@ -35,16 +47,11 @@
           <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
             <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
               <div *ngIf="element.counterPart.expenses">
-                <!--<div *ngFor="let expense of element.counterPart.expenses">
-                  <div>abcdef</div>
-                  <div>{{expense.id}}</div>
-                </div>-->
-
                 <table mat-table [dataSource]="element.counterPart.expenses" multiTemplateDataRows matSort
                        class="example-table">
 
                   <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef> Date</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
                     <td mat-cell *matCellDef="let element"> {{element.date}} </td>
                   </ng-container>
                   <ng-container matColumnDef="amount">

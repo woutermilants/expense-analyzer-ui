@@ -7,7 +7,7 @@ import {Counterpart} from "../models/counterpart.model";
 import {DatePipe} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Router} from '@angular/router';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-recurring-payments',
@@ -80,13 +80,20 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
         new Map(Object.entries(object)).forEach((value: Expense[], key) => {
           monthlypayments.push({name: this.monthLabels[key], isGroupBy: true});
+          var unsortedInnerExpenses: Expense[] = [];
           value.forEach(value1 => {
             value1.date = this.datepipe.transform(value1.date, 'dd/MM/yyyy').toString();
-            monthlypayments.push(value1);
-          })
+            unsortedInnerExpenses.push(value1);
+          });
 
+          monthlypayments = monthlypayments.concat(
+            unsortedInnerExpenses.sort((entry1, entry2) =>
+               moment(entry1.date, "DD/MM/YYYY").toDate().getTime() -
+              moment(entry2.date, "DD/MM/YYYY").toDate().getTime()
+
+            ));
+          this.reportDatasource = monthlypayments;
         });
-        this.reportDatasource = monthlypayments;
       });
   }
 
@@ -110,7 +117,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
   getExpensesForCounterPart(expense: Expense) {
     this.expenseService.getExpensesForCounterPart(expense.counterPart.accountNumber).subscribe(data => {
       //expense.date = this.datepipe.transform(expense.date, 'dd/MM/yyyy').toString();
-      data.forEach(innerExpense => innerExpense.date=this.datepipe.transform(innerExpense.date, 'dd/MM/yyyy').toString());
+      data.forEach(innerExpense => innerExpense.date = this.datepipe.transform(innerExpense.date, 'dd/MM/yyyy').toString());
       expense.counterPart.expenses = data;
     });
   }
