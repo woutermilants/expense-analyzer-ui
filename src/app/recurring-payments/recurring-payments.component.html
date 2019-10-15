@@ -15,19 +15,6 @@
             <span><a [routerLink]="" (click)="editCounterPart(expense.counterPart.accountNumber)" class="editCounterPart">Edit</a></span>
           </td>
         </ng-container>
-
-  <!--      <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>edit</th>
-          <td mat-cell *matCellDef="let expense">
-            <div>
-            <span><a [routerLink]="" (click)="setRecurringToFalse(expense.counterPart)" class="notRecurringButton">Not recurring</a></span>
-            <span><a [routerLink]="" (click)="editCounterPart(expense.counterPart.accountNumber)" class="editCounterPart">Edit</a></span>
-            </div>
-          </td>
-        </ng-container>
--->
-
-
         <ng-container matColumnDef="date">in
           <th mat-header-cell *matHeaderCellDef>Date</th>
           <td mat-cell *matCellDef="let expense">{{expense.date}}</td>
@@ -71,24 +58,10 @@
                     <td mat-cell *matCellDef="let element"> {{element.statement}} </td>
                   </ng-container>
 
-
                   <tr mat-header-row *matHeaderRowDef="innerColumnsToDisplay"></tr>
                   <tr mat-row *matRowDef="let row; columns: innerColumnsToDisplay;"></tr>
                 </table>
-
-
               </div>
-
-
-              <!--  <div class="example-element-diagram">
-                <div class="example-element-name"> {{element.id}} </div>
-                  <div class="example-element-name"> {{element.date}} </div>
-                  <div class="example-element-name"> {{element.amount}} </div>
-                </div>
-                <div class="example-element-description">
-                  {{element.description}}
-                  <span class="example-element-description-attribution"></span>
-                </div>-->
             </div>
           </td>
         </ng-container>
@@ -101,7 +74,6 @@
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplay; when: isNotGroup"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isNotGroup" class="example-detail-row"></tr>
-
       </table>
     </mat-card>
   </div>
