@@ -8,6 +8,7 @@ import {DatePipe} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
+import {MatOptionSelectionChange} from "@angular/material/core";
 
 @Component({
   selector: 'app-recurring-payments',
@@ -23,9 +24,13 @@ import * as moment from 'moment';
 })
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
+  recurringOptions: string[] = [
+    "","DAILY", "WEEKLY", "MONTHLY", "QUARTERLY", "BIANNUALLY", "YEARLY"
+  ];
+  currentCostSelection: string;
   expandedElement: any;
   columnsToDisplay: string[] = ['date', 'counterPartName', 'amount', 'statement'];
-  innerColumnsToDisplay: string[] = ['date', 'amount', 'statement', 'description'];
+  innerColumnsToDisplay: string[] = ['recurringOption', 'date', 'amount', 'statement', 'description'];
   monthLabels: Record<string, string> = {
     "01": 'January',
     "02": 'February',
@@ -127,6 +132,15 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
   }
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+
+  setRecurringOption(expense: Expense, $event: MatOptionSelectionChange) {
+    //this.currentCostSelection = $event.source.value;
+    console.log(expense);
+  }
+
+  getCurrentCostSelection() {
+    return this.currentCostSelection;
+  }
 }
 
 export interface GroupBy {

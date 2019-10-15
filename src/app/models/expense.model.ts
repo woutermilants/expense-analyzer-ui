@@ -9,6 +9,7 @@ export class Expense {
   description: string;
   statement: string;
   amount: number;
-  counterPart: Counterpart
+  counterPart: Counterpart;
+  recurringOption: string;
 }
 
