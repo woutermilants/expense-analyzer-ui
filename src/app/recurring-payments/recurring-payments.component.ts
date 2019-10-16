@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ReportService} from "../service/report.service";
 import {Expense} from "../models/expense.model";
-import {CounterpartService} from "../service/counterpart.service";
+import {CounterPartService} from "../service/counter-part.service";
 import {ExpenseService} from "../service/expense.service";
+import {RecurringCostService} from "../service/recurring-cost.service";
 import {Counterpart} from "../models/counterpart.model";
 import {DatePipe} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -63,9 +64,10 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
   reportDatasource = [];
 
   constructor(private reportService: ReportService,
-              private counterpartService: CounterpartService,
+              private counterpartService: CounterPartService,
               private datepipe: DatePipe,
               private expenseService: ExpenseService,
+              private recurringCostService : RecurringCostService,
               private router: Router) {
   }
 
@@ -133,13 +135,10 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 
-  setRecurringOption(expense: Expense, $event: MatOptionSelectionChange) {
+  createCost(expense: Expense, $event: MatOptionSelectionChange) {
     //this.currentCostSelection = $event.source.value;
     console.log(expense);
-  }
-
-  getCurrentCostSelection() {
-    return this.currentCostSelection;
+    this.recurringCostService.createOrAddCost(expense.counterPart.accountNumber, expense.id, $event.source.value);
   }
 }
 

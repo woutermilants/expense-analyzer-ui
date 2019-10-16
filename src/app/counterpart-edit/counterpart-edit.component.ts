@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Counterpart} from '../models/counterpart.model';
-import {CounterpartService} from '../service/counterpart.service';
+import {CounterPartService} from '../service/counter-part.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../models/page.model';
@@ -23,7 +23,7 @@ export class CounterpartEditComponent implements OnInit, AfterViewInit {
   paginationAndSorting: PaginationAndSorting;
 
 
-  constructor(private counterpartService: CounterpartService) {
+  constructor(private counterpartService: CounterPartService) {
     this.counterpartsDataSource  = new MatTableDataSource<Counterpart>();
   }
 

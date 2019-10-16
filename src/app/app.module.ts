@@ -8,7 +8,7 @@ import {CounterpartOverviewComponent} from './counterpart-overview/counterpart-o
 import {CounterpartEditComponent} from './counterpart-edit/counterpart-edit.component';
 import {SharedModule} from './shared/shared.module';
 import {ExpenseService} from './service/expense.service';
-import {CounterpartService} from './service/counterpart.service';
+import {CounterPartService} from './service/counter-part.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -22,6 +22,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
+import {RecurringCostService} from "./service/recurring-cost.service";
 
 @NgModule({
   declarations: [
@@ -50,8 +51,9 @@ import {FormsModule} from "@angular/forms";
   ],
   providers: [
     ExpenseService,
-    CounterpartService,
+    CounterPartService,
     ReportService,
+    RecurringCostService,
     DatePipe,
   ],
   bootstrap: [AppComponent]

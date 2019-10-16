@@ -11,7 +11,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class CounterpartService {
+export class CounterPartService {
   //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
  // private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
   //private counterpartUrl = 'http://84.194.148.237:8089/counterparts';

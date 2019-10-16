@@ -42,7 +42,7 @@
                   <ng-container matColumnDef="recurringOption">
                     <th mat-header-cell *matHeaderCellDef> Add to cost</th>
                     <td mat-cell *matCellDef="let element"> {{element.recurringOption}}<mat-select>
-                      <mat-option *ngFor="let recurringOption of recurringOptions" [value]="recurringOption" (onSelectionChange)="setRecurringOption(element, $event)">
+                      <mat-option *ngFor="let recurringOption of recurringOptions" [value]="recurringOption" (onSelectionChange)="createCost(element, $event)">
                         {{recurringOption}}
                       </mat-option>
                     </mat-select>
