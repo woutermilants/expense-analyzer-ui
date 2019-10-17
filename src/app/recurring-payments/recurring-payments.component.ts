@@ -26,7 +26,7 @@ import {MatOptionSelectionChange} from "@angular/material/core";
 export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
   recurringOptions: string[] = [
-    "","DAILY", "WEEKLY", "MONTHLY", "QUARTERLY", "BIANNUALLY", "YEARLY"
+    "", "DAILY", "WEEKLY", "MONTHLY", "QUARTERLY", "BIANNUALLY", "YEARLY"
   ];
   currentCostSelection: string;
   expandedElement: any;
@@ -67,7 +67,7 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
               private counterpartService: CounterPartService,
               private datepipe: DatePipe,
               private expenseService: ExpenseService,
-              private recurringCostService : RecurringCostService,
+              private recurringCostService: RecurringCostService,
               private router: Router) {
   }
 
@@ -95,9 +95,8 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
 
           monthlypayments = monthlypayments.concat(
             unsortedInnerExpenses.sort((entry1, entry2) =>
-               moment(entry1.date, "DD/MM/YYYY").toDate().getTime() -
+              moment(entry1.date, "DD/MM/YYYY").toDate().getTime() -
               moment(entry2.date, "DD/MM/YYYY").toDate().getTime()
-
             ));
           this.reportDatasource = monthlypayments;
         });
@@ -112,9 +111,17 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     return !item.isGroupBy;
   }
 
+  isNotRecurring(item): boolean {
+    if (item.hasOwnProperty('counterPart')) {
+      return !item['counterPart'].recurringCounterPart
+    }
+    return true;
+  }
+
   setRecurringToFalse(counterPart: Counterpart) {
     counterPart.recurringCounterPart = false;
-    this.counterpartService.updateCounterpart(counterPart)
+    this.counterpartService.updateCounterpart(counterPart);
+    this.reloadData();
   }
 
   editCounterPart(accountNumber: string) {
