@@ -11,5 +11,6 @@ export class Expense {
   amount: number;
   counterPart: Counterpart;
   recurringOption: string;
+  recurringExpense: boolean;
 }
 

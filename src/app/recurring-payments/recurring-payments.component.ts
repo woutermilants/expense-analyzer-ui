@@ -124,6 +124,12 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
     this.reloadData();
   }
 
+  setRecurringExpenseToFalse(expense: Expense) {
+    expense.recurringExpense = false;
+    this.expenseService.updateRecurringExpense(expense);
+    this.reloadData();
+  }
+
   editCounterPart(accountNumber: string) {
     this.router.navigateByUrl('/counterpart-overview?accountNumber=' + accountNumber);
   }

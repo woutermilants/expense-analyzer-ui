@@ -65,4 +65,9 @@ export class ExpenseService {
 
     return params;
   }
+
+  updateRecurringExpense(expense: Expense) {
+    var expenseRecurring = {"recurringExpense" : false};
+    return this.http.patch(this.expenseUrl + '/expense/' + expense.id, expenseRecurring);
+  }
 }
