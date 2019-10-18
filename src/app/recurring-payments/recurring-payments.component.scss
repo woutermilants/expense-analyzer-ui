@@ -70,6 +70,19 @@ tr.example-detail-row {
   width: 50%
 }
 
+.recurringExpenseCenter{
+  float: left;
+  position: relative;
+  left: -50%;
+  font-size: 11px;
+}
+
+.recurringExpenseContainer {
+  float: left;
+  position: relative;
+  left: 50%;
+}
+
 /*
 ::ng-deep .mat-select-content{
   width:2000px;

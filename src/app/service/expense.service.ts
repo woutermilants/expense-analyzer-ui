@@ -26,8 +26,8 @@ export class ExpenseService {
     return this.http.get<Page<Expense>>(this.expenseUrl, httpOptions['params'] = {params});
   }
 
-  public getExpensesForCounterPart(accountNumber : string): Observable<Expense[]> {
-    let url = this.expenseUrl + '/counterpart/' + accountNumber;
+  public getExpensesForCounterPart(accountNumber : string, onlyRecurring: boolean): Observable<Expense[]> {
+    let url = this.expenseUrl + '/counterpart/' + accountNumber + '?onlyRecurring=' + onlyRecurring;
     let expenses = this.http.get<Expense[]>(url, httpOptions);
     return expenses;
   }
