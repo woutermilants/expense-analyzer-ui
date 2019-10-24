@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Counterpart} from '../models/counterpart.model';
 import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
+import {environment} from "../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({'Access-Control-Allow-Origin': '*'}),
@@ -12,10 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class CounterPartService {
-  //private counterpartUrl = environment.counterpartApiUrl + '/counterparts';
- // private counterpartUrl = 'http://192.168.0.56:8089' + '/counterparts';
-  //private counterpartUrl = 'http://84.194.148.237:8089/counterparts';
-  private counterpartUrl = 'http://localhost:8089/counterparts';
+  private counterpartUrl = environment.backendUrl + '/counterparts';
 
   constructor(private http: HttpClient) {
   }

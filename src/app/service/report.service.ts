@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Page} from '../models/page.model';
 import {PaginationAndSorting} from '../models/pagination-and-sorting.model';
 import {Expense} from "../models/expense.model";
+import {environment} from "../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
@@ -12,10 +13,7 @@ const httpOptions = {
 @Injectable()
 export class ReportService {
 
-  //private reportUrl = environment.reportApiUrl + '/reports';
-  private reportUrl = 'http://localhost:8089' + '/reports';
-  //private reportUrl = 'http://192.168.0.56:8089' + '/reports';
- // private reportUrl = 'http://84.194.148.237:8089' + '/reports';
+  private reportUrl = environment.backendUrl + '/reports';
 
   constructor(private http: HttpClient) {
   }

@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable()
 export class RecurringCostService {
 
-  private recurringCostUrl = 'http://localhost:8089' + '/recurringcost';
+  private recurringCostUrl = environment.backendUrl + '/recurringcost';
 
   constructor(private http: HttpClient) {
   }
