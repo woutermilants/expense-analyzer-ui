@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'localhost:8089'
+  //backendUrl: 'localhost:8089'
+  backendUrl: 'http://woutermilants.dns-cloud.net:8089'
 };
 
 /*
