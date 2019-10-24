@@ -8,7 +8,7 @@
       <table mat-table [dataSource]="expensesDataSource" matSort class="example-table">
         <ng-container matColumnDef="counterPartName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>counter part</th>
-          <td mat-cell *matCellDef="let expense">{{expense.counterPart.name}}</td>
+          <td mat-cell *matCellDef="let expense">{{expense.counterPart != null ? expense.counterPart.name: "UNKNOWN"}}</td>
         </ng-container>
 
         <ng-container matColumnDef="amount">
