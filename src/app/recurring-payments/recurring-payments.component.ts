@@ -121,7 +121,12 @@ export class RecurringPaymentsComponent implements OnInit, AfterViewInit {
   setRecurringToFalse(counterPart: Counterpart) {
     counterPart.recurringCounterPart = false;
     this.counterpartService.updateCounterpart(counterPart);
-    this.reloadData();
+    for (var i = 0; i<this.reportDatasource.length; i++) {
+      if (this.reportDatasource[i].counterPart && this.reportDatasource[i].counterPart.accountNumber == counterPart.accountNumber) {
+        delete this.reportDatasource[i];
+      }
+    }
+    //this.reloadData();
   }
 
   setRecurringExpenseToFalse(expense: Expense) {
