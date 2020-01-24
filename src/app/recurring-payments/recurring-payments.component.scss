@@ -1,0 +1,92 @@
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  text-align: left;
+}
+
+th, td {
+  padding: 0px 15px 0px 15px !important;
+  text-align: left;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.notRecurringButton {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 20px;
+  opacity: 0.9;
+}
+
+.editCounterPart {
+  display: inline-block;
+  background-color: #de963c;
+  color: #ffffff;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 20px;
+  opacity: 0.9;
+}
+.createCost {
+  display: inline-block;
+  background-color: #de523c;
+  color: #ffffff;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 20px;
+  opacity: 0.9;
+}
+
+.addToCostBlock {
+  width: 250px;
+}
+.addToCostBlockEntry {
+  width: 50%
+}
+
+.recurringExpenseCenter{
+  float: left;
+  position: relative;
+  left: -50%;
+  font-size: 11px;
+}
+
+.recurringExpenseContainer {
+  float: left;
+  position: relative;
+  left: 50%;
+}
+
+/*
+::ng-deep .mat-select-content{
+  width:2000px;
+  background-color: red;
+  font-size: 10px;
+}
+*/

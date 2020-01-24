@@ -1,0 +1,107 @@
+<div>
+  <div class="col-xs-12">
+    <h3>{{expense.date}}</h3>
+
+    <div>
+      <p>
+        {{expense.accountName}} ({{expense.accountNumber}})
+      </p>
+    </div>
+    <div>
+      <p>
+        {{expense.counterPart.name}} ( {{expense.counterPart.accountNumber}})
+      </p>
+      <p>
+        <button class="btn btn-danger" (click)="setRecurringCounterpartToFalse(expense.counterPart)">Counterpart not
+          recurring
+        </button>
+      </p>
+    </div>
+    <hr>
+    <div>
+      <p>{{expense.description}}</p>
+      <hr>
+      <p>{{expense.statement}} </p>
+    </div>
+
+    <p>{{expense.amount}} {{expense.currency}}</p>
+
+    <p>
+      <button class="btn btn-danger" (click)="setRecurringExpenseToFalse(expense.id)">Expense not recurring</button>
+    </p>
+    <hr>
+    <hr>
+    <div>
+      <h4>Expenses from same counterpart</h4>
+
+      <form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+        <a (click)="selectAllOtherExpenses()">Select all</a>
+        <div>
+          <input type="text" formControlName="description"/>
+        </div>
+        <div novalidate>
+          <table formArrayName="expensesMostLikely">
+            <div *ngFor="let item of form.controls.expensesMostLikely.controls; let i = index" [formGroupName]="i"
+                 matTooltip="{{item.controls.description.value}}">
+              <input type="checkbox" formControlName="selected" ng-checked="selected.value"/>
+              <span *ngIf="item.controls.recurringOption.value !== 'UNKNOWN'">({{item.controls.recurringOption.value}}
+                )</span>
+              {{item.controls.date.value}}
+              {{item.controls.name.value}}
+              {{item.controls.amount.value}}
+              <a style="cursor: pointer" (click)="setRecurringExpenseToFalse(item.controls.id.value)">Not recurring</a>
+            </div>
+          </table>
+
+          <hr>
+          <table formArrayName="expensesLikely">
+            <div *ngFor="let item of form.controls.expensesLikely.controls; let i = index" [formGroupName]="i"
+                 matTooltip="{{item.controls.description.value}}">
+              <input type="checkbox" formControlName="selected" ng-checked="selected.value"/>
+              <span *ngIf="item.controls.recurringOption.value !== 'UNKNOWN'">({{item.controls.recurringOption.value}}
+                )</span>
+              {{item.controls.date.value}}
+              {{item.controls.name.value}}
+              {{item.controls.amount.value}}
+              <a style="cursor: pointer" (click)="setRecurringExpenseToFalse(item.controls.id.value)">Not recurring</a>
+            </div>
+          </table>
+          <hr>
+          <table formArrayName="expensesUnlikely">
+            <div *ngFor="let item of form.controls.expensesUnlikely.controls; let i = index" [formGroupName]="i"
+                 matTooltip="{{item.controls.description.value}}">
+              <input type="checkbox" formControlName="selected" ng-checked="selected.value"/>
+              <span *ngIf="item.controls.recurringOption.value !== 'UNKNOWN'">({{item.controls.recurringOption.value}}
+                )</span>
+              {{item.controls.date.value}}
+              {{item.controls.name.value}}
+              {{item.controls.amount.value}}
+              <a style="cursor: pointer" (click)="setRecurringExpenseToFalse(item.controls.id.value)">Not recurring</a>
+            </div>
+          </table>
+        </div>
+
+        <select class="custom-select" formControlName="recurringOption">
+          <option *ngFor="let recurringOption of recurringOptions" [ngValue]="recurringOption">{{recurringOption}}
+          </option>
+        </select>
+
+        <p>
+          <button class="btn btn-primary mr-1" type="submit">Expense recurring</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--<div formArrayName="items"-->
+<!--     *ngFor="let item of orderForm.get('items').controls; let i = index;">-->
+<!--  <div [formGroupName]="i">-->
+<!--    <input formControlName="name" placeholder="Item name">-->
+<!--    <input formControlName="description" placeholder="Item description">-->
+<!--    <input formControlName="price" placeholder="Item price">-->
+<!--  </div>-->
+
+<!--  Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }}-->
+<!--</div>-->

@@ -1,0 +1,51 @@
+<div class="col-xs-5">
+  <h2>Recurring</h2>
+
+  <div class="example-table-container col-xs-5" *ngIf="reportDatasource">
+    <mat-card>
+      <table mat-table [dataSource]="reportDatasource" multiTemplateDataRows matSort class="example-table">
+<!--        <ng-container matColumnDef="counterPartName">-->
+<!--          <th mat-header-cell *matHeaderCellDef>counter part</th>-->
+<!--          <td mat-cell *matCellDef="let expense" [class.example-expanded-row]="expandedElement === expense">-->
+<!--            <span>-->
+<!--              {{expense.counterPart.name}}-->
+<!--              ({{expense.counterPart.accountNumber}}) </span>-->
+<!--          </td>-->
+<!--        </ng-container>-->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>description</th>
+          <td mat-cell *matCellDef="let recurringCost">{{recurringCost.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="counterPart">
+          <th mat-header-cell *matHeaderCellDef>counterpart</th>
+          <td mat-cell *matCellDef="let recurringCost">{{recurringCost.counterPart.name}}
+            <a (click)="editCounterPart(recurringCost.counterPart.accountNumber)">edit</a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recurringOption">
+          <th mat-header-cell *matHeaderCellDef>recurringOption</th>
+          <td mat-cell *matCellDef="let recurringCost">{{recurringCost.recurringOption}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>amount</th>
+          <td mat-cell *matCellDef="let recurringCost">{{recurringCost.amount}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="groupHeader">
+          <td colspan="999" mat-cell *matCellDef="let groupBy"><strong>{{groupBy.name}}</strong></td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"></tr>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay; when: isNotGroup" (click)="selectedRecurringCost = element"></tr>
+      </table>
+    </mat-card>
+  </div>
+</div>
+<div class="col-xs-7" *ngIf="selectedRecurringCost">
+  <app-recurring-payment-detail [recurringCost]="selectedRecurringCost"></app-recurring-payment-detail>
+</div>
+
+<!--
+https://stackblitz.com/edit/angular-material-table-row-grouping?file=src%2Fapp%2Fapp.component.html-->

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backendUrl: 'http://localhost:8089'
+  //backendUrl: 'http://woutermilants.dns-cloud.net:8089'
 };
 
 /*
